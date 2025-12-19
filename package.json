@@ -5,25 +5,20 @@
   "main": "index.js",
   "scripts": {
     "init-project": "npm install && npm-run-all init:*",
-
     "init:dirs": "mkdir -p sass css vendor images js",
     "init:files": "touch README.md index.html sass/style.scss js/script.js",
     "init:gitignore": "curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore -o .gitignore",
-
     "test": "npm-run-all test:*",
     "test:html": "html-validator *.html",
-
     "build": "npm-run-all build:* test",
     "build:sass": "sass --style=compressed --no-source-map sass:css",
-    "build:autoprefixer": "ppostcss css/*.css --use autoprefixer -d css",
-
+    "build:autoprefixer": "postcss css/*.css --use autoprefixer -d css",
     "build-dev": "npm-run-all build-dev:sass build-dev:autoprefixer",
     "build-dev:sass": "sass --style=expanded --no-source-map sass:css",
-
+    "build-dev:autoprefixer": "postcss css/*.css --use autoprefixer -d css",
     "watch": "npm-run-all build-dev -p watch:*",
     "watch:browsersync": "browser-sync start --server --files \"css/*.css\" \"*.html\"",
     "watch:sassprefixer": "onchange sass/*.scss -- npm run build-dev"
-
   },
   "keywords": [],
   "author": "",
